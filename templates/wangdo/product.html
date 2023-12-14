@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Poduct</title>
+        <style>
+            body
+            {
+                margin: 0;
+                background-color: rgb(204, 239, 239);
+            }
+
+            ul{
+                margin: 0;
+                padding: 15px;
+                list-style-type: none;
+                overflow: hidden;
+                background-color: rgb(7, 155, 155);
+            }
+
+            li{
+                float: right;
+                padding: 5px;
+                font-family: cursive;
+                font-size: medium;
+            }
+
+            li a{
+                text-decoration: none;
+                color: black;
+            }
+
+            li a:hover
+            {
+                text-decoration: underline;
+                color: white;
+            }
+
+            .i{
+                border: thin;
+                border-radius: 50px;
+                width: 300px;
+                height: 500px;
+                margin-bottom: 25px;
+            }
+
+            .im{
+                border: thin;
+                border-radius: 50px;
+                width: 150px;
+                height: 200px;
+                margin-left: 5px;
+            }
+
+            div.a{
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                margin: 25px;
+            }
+
+            button{
+                border: thin;
+                border-radius: 50px;
+                width: 150px;
+                height: 70px;
+                font-family: cursive;
+                font-size: medium;
+                color:rgb(255, 128, 0);
+                cursor: pointer;
+            }
+
+            
+        </style>
+    </head>
+    <body>
+        <div>
+            <ul>
+                <li><a href="{% url 'index' %}">Logout</a></li>
+                <li><a href="{% url 'password_change_view' %}">change password</a></li>
+                <li>Welcome {{request.user}}</li>
+                <li style="float: left;"><a href="">About</a></li>
+                <li style="float: left;"><a href="">Career</a></li>
+                <li style="float: left;"><a href="{% url 'products' %}">Products</a></li>
+                <li style="float: left;"><a href="{% url 'cart' %}">cart</a></li>
+            </ul>
+        </div>
+
+        <div class="a" style="text-align: center;">                
+            <img class="i" src="{{item.image}}">
+            <h3>{{item.description}}</h3>
+            <form style="margin-bottom: 25px;" method="post">
+                {% csrf_token %}
+                <input type="hidden" value="{{item.title}}" name="item">
+                <input type="hidden" value="{{item.image}}" name="image">
+                <button type="submit">Add to Cart &#128722</button>
+            </form>
+        </div>
+
+        <div>
+            <img class="im" src="{{item.image}}"> <img class="im" src="{{item.image}}">  <img class="im" src="{{item.image}}">
+        </div>
+
+    </body>
+</html>

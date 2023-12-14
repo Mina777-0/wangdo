@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Home Page</title>
+        <style>
+            body
+            {
+                margin: 0;
+                background-color: rgb(204, 239, 239);
+            }
+            ul{
+                margin: 0;
+                padding: 15px;
+                list-style-type: none;
+                overflow: hidden;
+                background-color: rgb(7, 155, 155);
+            }
+
+            li{
+                float: right;
+                padding: 5px;
+                font-family: cursive;
+                font-size: medium;
+            }
+
+            li a{
+                text-decoration: none;
+                color: black;
+            }
+
+            li a:hover
+            {
+                text-decoration: underline;
+                color: white;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div>
+            <ul>
+                <li><a href="{% url 'index' %}">Logout</a></li>
+                <li><a href="{% url 'password_change_view' %}">change password</a></li>
+                <li>Welcome {{request.user}}</li>
+                <li style="float: left;"><a href="">About</a></li>
+                <li style="float: left;"><a href="">Career</a></li>
+                <li style="float: left;"><a href="{% url 'products' %}">Products</a></li>
+                <li style="float: left;"><a href="{% url 'cart' %}">cart</a></li>
+            </ul>
+        </div>
+    </body>
+</html>

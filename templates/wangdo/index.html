@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Main Page</title>
+        <style>
+            body{
+                margin: 0;
+                background-color: rgb(204, 239, 239);
+            }
+            .a
+            {
+                margin: 150px 600px ;
+                padding: 50px;
+                text-align: center;
+                border: thin;
+                border-radius: 50px;
+                width: 200px;
+                background-color: rgb(7, 155, 155);
+                display: none;
+            }
+            #start
+            {
+                margin: 75px 700px;
+                width: 120px;
+                height: 55px;
+                border: thin;
+                border-radius: 50px;
+                font-family:cursive;
+                font-weight: bold;
+                font-size: large;
+            }
+            .b 
+            {
+                border: thin;
+                border-radius: 50px;
+                font-family:Arial, Helvetica, sans-serif;
+                height: 30px;
+                width: 200px;
+                text-align: center;
+            }
+            .b::placeholder{padding: 8px;}
+
+            a
+            {
+                text-decoration: none;
+                color: rgb(243, 199, 117);
+            }
+            a:hover{text-decoration: underline; color: white;}
+
+            .c{
+                border: thin;
+                border-radius: 50px;
+                background-color: rgb(7, 240, 240);
+                color: white;
+                width: 55px;
+                height: 55px;
+            }
+            .d{
+                text-align: center;
+                margin-top: 25px;
+                font-family: cursive;
+                font-size: large;
+            }
+            
+        </style>
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+                document.querySelector('#start').onclick= function(){
+                    document.querySelector('#login').style.display = "block";
+                    document.querySelector('#start').style.display= "none"
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div class="d">
+            {% load static %}
+            <h1>Welcome to Wangdo</h1>
+            <img style="width: 400px; height: 350px;" src= "{% static 'xmas.gif' %}">
+        </div>
+            {% if message %}
+                <h4 style="font-family: cursive;text-align: center;">{{ message }}</h4>
+            {% endif %}
+        <button id="start">Get ready</button>
+        <div>
+            
+        </div>
+        <div id="login" class="a">
+            <h3 style="font-family:cursive;">Welcome to Wangdo</h3><br>
+            <p style="font-family:cursive">Please login</p>
+        
+            <form method="post">
+                {% csrf_token %}
+                <input class="b" type="email" name="email" placeholder="Enter your email"><br><br>
+                <input class="b" type="password" name="password" placeholder="Enter your Password"><br><br>
+                <button class="c" type="submit">Login</button>
+            </form><br>
+            <a href="{% url 'password_reset' %}">Forgot your password?</a><br><br>
+            <a href="{% url 'signup' %}"><button class="c">Signup</button></a>
+
+        </div>
+
+    </body>
+</html>

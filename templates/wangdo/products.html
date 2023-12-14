@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Poducts</title>
+        <style>
+            body
+            {
+                margin: 0;
+                background-color: rgb(204, 239, 239);
+            }
+
+            ul{
+                list-style-type: none;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            li{
+                padding: 7px;
+                text-align: center;
+            }
+
+            img{
+                border: thin;
+                border-radius: 50px;
+                width: 150px;
+                height: 200px;
+                opacity: 0.6;
+                padding-bottom: 20px;
+            }
+
+            img:hover{
+                opacity: 1;
+            }
+
+            div{
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+
+            
+        </style>
+    </head>
+    <body>
+        <div>
+            <ul>
+                {% for item in items %}
+                
+                    <li style="font-weight: bold;">{{ item.title }}</li>
+                    <li>{{ item.price }}$</li>
+                    <li>{{ item.description }}</li>
+                    <li><a href="{% url 'product' item.id %}"><img src="{{item.image}}"></a></li>
+                    
+                {% endfor %}
+            </ul>
+            
+        </div>
+    </body>
+</html>

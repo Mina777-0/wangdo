@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Poducts</title>
+        <style>
+            body
+            {
+                margin: 0;
+                background-color: rgb(204, 239, 239);
+            }
+
+            img{
+                border: thin;
+                border-radius: 50px;
+                width: 150px;
+                height: 200px;
+                padding-bottom: 20px;
+            }
+
+            ul.a{
+                list-style-type:none;
+                text-align: center;
+                margin: 50px;
+            }
+            li.c{
+               padding: 8px; 
+            }
+
+            form{
+                margin-bottom: 25px;
+            }
+
+            button{
+                border: thin;
+                border-radius: 50px;
+                color: orangered;
+                width: 75px;
+                height: 50px;
+            }
+
+            .a{
+                font-family: cursive;
+                font-size: large;
+                text-align: center;
+            }
+
+            ul.d{
+                margin: 0;
+                padding: 15px;
+                list-style-type: none;
+                overflow: hidden;
+                background-color: rgb(7, 155, 155);
+            }
+
+            li.e{
+                float: right;
+                padding: 5px;
+                font-family: cursive;
+                font-size: medium;
+            }
+
+            li.e a{
+                text-decoration: none;
+                color: black;
+            }
+
+            li.e a:hover
+            {
+                text-decoration: underline;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <ul class="d">
+                <li class="e"><a href="{% url 'index' %}">Logout</a></li>
+                <li class="e"><a href="{% url 'password_change_view' %}">change password</a></li>
+                <li class="e">Welcome {{request.user}}</li>
+                <li class="e" style="float: left;"><a href="">About</a></li>
+                <li class="e" style="float: left;"><a href="">Career</a></li>
+                <li class="e" style="float: left;"><a href="{% url 'products' %}">Products</a></li>
+                <li class="e" style="float: left;"><a href="{% url 'cart' %}">cart</a></li>
+            </ul>
+        </div>
+        <div class="a">
+            <h2>Your Wangdo Cart &#128722</h2>
+        </div>
+        <div>
+            <ul class="a">
+                {% for item in items %}
+                    <li class="c">{{item.item}}</li>
+                    <li class="c"><img src="{{item.image}}"></li>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{item.item}}">
+                        <button type="submit">Remove from Cart</button>
+                    </form>
+                {% endfor %}
+            </ul>   
+        </div>
+    </body>
+</html>

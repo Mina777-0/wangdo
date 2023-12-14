@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>SIgn up Page</title>
+        <style>
+            body{
+                margin: 0;
+                background-color: rgb(204, 239, 239);
+            }
+            .a
+            {
+                margin: 100px 600px;
+                padding: 50px;
+                border: thin;
+                border-radius: 50px;
+                background-color: rgb(7, 155, 155);
+                text-align: center;
+            }
+            .d{
+                text-align: center;
+                margin-top: 25px;
+                font-family: cursive;
+                font-size: large;
+            }
+
+            .b{
+                border: thin;
+                border-radius: 50px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+                width: 200;
+                height: 30px;
+            }
+
+            .c{
+                border: thin;
+                border-radius: 50px;
+                background-color: rgb(7, 240, 240);
+                color:rgb(255, 128, 0);
+                width: 55px;
+                height: 55px;
+            }
+
+            .e
+            {
+                border: thin;
+                border-radius: 50px;
+                background-color: rgb(7, 240, 240);
+                color:rgb(255, 128, 0);
+                width: 75px;
+                height: 55px;
+            }
+            
+        </style>
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+                let x = document.querySelector('#p1');
+                let y = document.querySelector('#p2');
+
+                y.addEventListener('keyup', function(){
+                    if(x.value == y.value)
+                    {
+                        document.querySelector('#pmatch').innerHTML = "Passwords are matched";
+                    }
+                    else
+                    {
+                        document.querySelector('#pmatch').innerHTML = "Passwords are not matched";  
+                    }
+                })
+                x.addEventListener('keyup', function(){
+                    let strength = 0;
+
+                if(x.value.length > 8 )
+                {
+                    strength += 1;
+                }
+
+                if(x.value.match(/[a-z]/))
+                {
+                    strength += 1;
+                }
+
+                if(x.value.match(/[A-Z]/))
+                {
+                    strength += 1;
+                }
+
+                if(x.value.match(/[\d]/))
+                {
+                    strength += 1;
+                }
+                if(x.value.match(/[^a-zA-Z\d]/))
+                {
+                    strength += 1;
+                }
+
+                if(strength <= 2)
+                {
+                    document.querySelector('#weak').style.display = "block";
+                    document.querySelector('#medium').style.display = "none";
+                    document.querySelector('#strong').style.display = "none";
+                }
+
+                else if(strength <= 4)
+                {
+                    document.querySelector('#weak').style.display = "none";
+                    document.querySelector('#medium').style.display = "block";
+                    document.querySelector('#strong').style.display = "none";
+                }
+
+                else
+                {
+                    document.querySelector('#weak').style.display = "none";
+                    document.querySelector('#medium').style.display = "none";
+                    document.querySelector('#strong').style.display = "block";
+                }
+                })
+                
+            });
+        </script>
+    </head>
+    <body>
+        <div class="d">
+            {% load static %}
+            <h1>Welcome to Wangdo</h1>
+            <img style="width: 75px; height: 75px;" src= "{% static 'xmas.gif' %}">
+        </div>
+        <div class="a">
+            <form method="post">
+                {% csrf_token %}
+
+                {{form.first_name}}<br><br>
+                {{form.last_name}}<br><br>
+                {{form.email}}<br><br>
+                {{form.password1}}<br><br>
+                <p style="color: rgb(248, 197, 10); display: none;" id="weak">Password is weak</p>
+                <p style="color: rgb(248, 197, 10); display: none;" id="medium">Password is medium</p>
+                <p style="color: rgb(248, 197, 10); display: none;" id="strong">Password is strong</p>
+                <ul>
+                    <li>Your password must contain at least 8 characters</li>
+                    <li>Your password can't be too similar to your other personal information</li>
+                    <li>Your password can't be a commonly used password</li>
+                </ul>
+                {{form.password2}}<br><br>
+
+                <p style="color: rgb(243, 199, 117);" id="pmatch"></p>
+                
+                
+                
+                <button class="c" type="submit">Submit</button>
+            </form><br><br>
+            <a href="{% url 'index' %}"><button class="e">Return to login page</button></a>
+        </div>
+    </body>
+</html>
